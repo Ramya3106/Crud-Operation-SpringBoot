@@ -10,7 +10,7 @@ public class Todocontroller {
     private TodoService todoService;
     @GetMapping("/get")
         String getTodo(){
-          todoService.printTodos();
+
         return "Todo";
     }
     //PathVariable
