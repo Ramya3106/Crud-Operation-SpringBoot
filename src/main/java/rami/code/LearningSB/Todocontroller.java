@@ -10,7 +10,6 @@ public class Todocontroller {
     private TodoService todoService;
     @GetMapping("/get")
         String getTodo(){
-
         return "Todo";
     }
     //PathVariable
@@ -25,7 +24,8 @@ public class Todocontroller {
         return "Todo with Id" + id;
     }
     @PostMapping("/create")
-    String createUser(@RequestBody String body){
+    String createUser(@RequestBody Todo todo){
+        todoService.createTodo(todo);
         return body;
     }
     @PutMapping("/{id}")

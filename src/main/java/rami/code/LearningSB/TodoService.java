@@ -9,7 +9,7 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    public void printTodos(){
-        System.out.println(todoRepository.getAllTodos());
+    public Todo createTodo(Todo todo){
+        return todoRepository.save(todo);
     }
 }
