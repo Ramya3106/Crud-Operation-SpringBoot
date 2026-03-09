@@ -1,9 +1,7 @@
 package rami.code.LearningSB;
-import org.springframework.stereotype.Component;
+import rami.code.LearningSB.models.Todo;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Component
-public class TodoRepository {
-    String getAllTodos(){
-        return "Todos";
-    }
+//CRUD - Create Read Update Delete
+public interface TodoRepository extends JpaRepository<Todo, Long> {
 }
