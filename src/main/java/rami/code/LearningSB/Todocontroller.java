@@ -1,7 +1,10 @@
 package rami.code.LearningSB;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rami.code.LearningSB.models.Todo;
 
 @RestController
 @RequestMapping("api/v1/todo")
@@ -23,11 +26,12 @@ public class Todocontroller {
     String getTodoByIdParam(@RequestParam("todoId")long id){
         return "Todo with Id" + id;
     }
+
     @PostMapping("/create")
-    String createUser(@RequestBody Todo todo){
-        todoService.createTodo(todo);
-        return body;
+    ResponseEntity<Todo>createUser(@RequestBody Todo todo){
+        return new ResponseEntity<>(todoService.createTodo(todo), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     String updateTodoById(@PathVariable long id) {
         return "Update Todo with Id" + id;
