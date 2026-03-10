@@ -27,12 +27,6 @@ public class Todocontroller {
         }
     }
 
-    //Request Param
-    @GetMapping
-    String getTodoByIdParam(@RequestParam("todoId")long id){
-        return "Todo with Id" + id;
-    }
-
     @PostMapping("/create")
     ResponseEntity<Todo>createUser(@RequestBody Todo todo){
             Todo createTodo = todoService.createTodo(todo);
