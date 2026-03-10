@@ -15,6 +15,7 @@ public class Todocontroller {
         String getTodo(){
         return "Todo";
     }
+
     //PathVariable
     @GetMapping("/{id}")
     ResponseEntity<Todo> getTodoById(@PathVariable long id){
@@ -29,7 +30,12 @@ public class Todocontroller {
 
     @PostMapping("/create")
     ResponseEntity<Todo>createUser(@RequestBody Todo todo){
-        return new ResponseEntity<>(todoService.createTodo(todo), HttpStatus.CREATED);
+        try {
+            Todo createTodo = todoService.createTodo(todo);
+            return new ResponseEntity<>(createTodo, HttpStatus.CREATED);
+        }catch(RuntimeException exception){
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
+        }
     }
 
     @PutMapping("/{id}")
