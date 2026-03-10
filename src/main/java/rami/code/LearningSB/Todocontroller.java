@@ -34,7 +34,7 @@ public class Todocontroller {
             Todo createTodo = todoService.createTodo(todo);
             return new ResponseEntity<>(createTodo, HttpStatus.CREATED);
         }catch(RuntimeException exception){
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
 
