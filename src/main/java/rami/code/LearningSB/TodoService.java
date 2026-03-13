@@ -12,16 +12,29 @@ public class TodoService {
     @Autowired
     private TodoRepository todoRepository;
 
-    public Todo createTodo(Todo todo){
+    public Todo createTodo(Todo todo) {
 
         return todoRepository.save(todo);
     }
 
-    public Todo getTodoById(Long id){
+    public Todo getTodoById(Long id) {
         return todoRepository.findById(id).orElseThrow(() -> new RuntimeException("Todo not found"));
     }
 
     public List<Todo> getTodos() {
         return todoRepository.findAll();
     }
+
+    public Todo updateTodo(Todo todo) {
+        return todoRepository.save(todo);
+    }
+
+    public void deleteTodoById(Long id) {
+        todoRepository.delete(getTodoById(id));
+    }
+
+    public void deleteTodo(Todo todo) {
+        todoRepository.delete(todo);
+    }
+
 }

@@ -34,19 +34,20 @@ public class Todocontroller {
     }
 
 
-
     @PostMapping("/create")
     ResponseEntity<Todo>createUser(@RequestBody Todo todo){
             Todo createTodo = todoService.createTodo(todo);
             return new ResponseEntity<>(createTodo, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
-    String updateTodoById(@PathVariable long id) {
-        return "Update Todo with Id" + id;
+    @PutMapping
+    ResponseEntity<Todo> updateTodoById(@RequestBody Todo todo) {
+       return new ResponseEntity<>(todoService.updateTodo(todo), HttpStatus.OK);
     }
+
     @DeleteMapping("/{id}")
-    String DeleteTodoById(@PathVariable long id) {
-        return "Delete Todo with Id" + id;
+    Void DeleteTodoById(@PathVariable long id) {
+        todoService.deleteTodoById(id);
+        return null;
     }
 }
