@@ -5,7 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.NotFound;
@@ -15,14 +17,12 @@ import org.hibernate.annotations.NotFound;
 public class Todo {
     @Id
     @GeneratedValue
-Long id;
+    Long id;
     @NotNull
     @NotBlank
-String title;
+    String title;
     @NotNull
     @NotBlank
-String description;
-Boolean isCompleted;
-@Email
-String email;
+    String description;
+    Boolean isCompleted;
 }

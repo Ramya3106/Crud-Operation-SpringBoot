@@ -1,5 +1,6 @@
 package rami.code.LearningSB;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/todo")
+@Slf4j
 public class Todocontroller {
     @Autowired
     private TodoService todoService;
@@ -26,6 +28,9 @@ public class Todocontroller {
             Todo createTodo = todoService.getTodoById(id);
             return new ResponseEntity<>(createTodo, HttpStatus.OK);
         }catch(RuntimeException exception){
+            log.info("Error");
+            log.warn("");
+            log.error("", exception);
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
