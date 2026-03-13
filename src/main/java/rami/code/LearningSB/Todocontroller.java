@@ -1,6 +1,7 @@
 package rami.code.LearningSB;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,11 @@ public class Todocontroller {
     @GetMapping
     ResponseEntity<List<Todo>> getTodos() {
         return new ResponseEntity<List<Todo>>(todoService.getTodos(), HttpStatus.OK);
+    }
+
+    @GetMapping("/page")
+     ResponseEntity<Page<Todo>> getTodosPaged(@RequestParam int page, @RequestParam int size) {
+      return new ResponseEntity<>(todoService.getAllTodosPages(page, size), HttpStatus.OK);
     }
 
 
