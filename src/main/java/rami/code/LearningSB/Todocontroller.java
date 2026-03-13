@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rami.code.LearningSB.models.Todo;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/todo")
 public class Todocontroller {
@@ -26,6 +28,12 @@ public class Todocontroller {
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping
+    ResponseEntity<List<Todo>> getTodos() {
+        return new ResponseEntity<List<Todo>>(todoService.getTodos(), HttpStatus.OK);
+    }
+
+
 
     @PostMapping("/create")
     ResponseEntity<Todo>createUser(@RequestBody Todo todo){
@@ -41,5 +49,4 @@ public class Todocontroller {
     String DeleteTodoById(@PathVariable long id) {
         return "Delete Todo with Id" + id;
     }
-
 }

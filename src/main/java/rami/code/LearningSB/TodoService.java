@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rami.code.LearningSB.models.Todo;
 
+import java.util.List;
+
 @Service
 public class TodoService {
 
@@ -11,9 +13,15 @@ public class TodoService {
     private TodoRepository todoRepository;
 
     public Todo createTodo(Todo todo){
+
         return todoRepository.save(todo);
     }
+
     public Todo getTodoById(Long id){
         return todoRepository.findById(id).orElseThrow(() -> new RuntimeException("Todo not found"));
+    }
+
+    public List<Todo> getTodos() {
+        return todoRepository.findAll();
     }
 }
