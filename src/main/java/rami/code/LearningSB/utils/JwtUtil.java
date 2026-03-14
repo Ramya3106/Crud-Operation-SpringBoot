@@ -1,5 +1,6 @@
 package rami.code.LearningSB.utils;
 
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -23,5 +24,20 @@ public class JwtUtil {
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION))
                 .signWith(secertKey, SignatureAlgorithm.HS256)
                 .compact();
+    }
+    public boolean validateJwtToken(String token){
+        try{
+            Jwts.parserBuilder()
+                    .setSigningKey(secertKey)
+                    .build()
+                    .parseClaimsJwt(token)
+                    .getBody()
+                    .getSubject();
+            return true;
+        }
+        catch(JwtException exception){
+            return false;
+        }
+
     }
 }
