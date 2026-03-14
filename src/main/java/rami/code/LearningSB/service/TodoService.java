@@ -1,10 +1,11 @@
-package rami.code.LearningSB;
+package rami.code.LearningSB.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import rami.code.LearningSB.models.Todo;
+import rami.code.LearningSB.repository.TodoRepository;
 
 import java.util.List;
 
