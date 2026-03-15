@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import rami.code.LearningSB.models.User;
 import rami.code.LearningSB.repository.UserRepository;
 import rami.code.LearningSB.service.UserService;
 
@@ -25,10 +26,17 @@ public class AuthController {
         if(userRepository.findByEmail(email).isPresent()){
            return new ResponseEntity<>("Email already exists", HttpStatus.CONFLICT);
         }
-
+        userService.createUser(User.builder().email(email).password(password).build());
+        return new ResponseEntity<>("Successfully Registered", HttpStatus.CREATED);
     }
     @PostMapping("/login")
     public String loginUser(@RequestBody Map<String, String> body){
+        String email = body.get("email");
+        String password = body.get("password");
 
+        var userOptional = userRepository.findByEmail(email);
+        if(userOptional.isEmpty()) {
+            return new ResponseEntity<>("User not Registered", HttpStatus.UNAUTHORIZED);
+        }
     }
 }
