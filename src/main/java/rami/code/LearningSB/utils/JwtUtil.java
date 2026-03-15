@@ -25,14 +25,17 @@ public class JwtUtil {
                 .signWith(secertKey, SignatureAlgorithm.HS256)
                 .compact();
     }
+    public String extractEmail(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(secertKey)
+                .build()
+                .parseClaimsJwt(token)
+                .getBody()
+                .getSubject();
+    }
     public boolean validateJwtToken(String token){
         try{
-            Jwts.parserBuilder()
-                    .setSigningKey(secertKey)
-                    .build()
-                    .parseClaimsJwt(token)
-                    .getBody()
-                    .getSubject();
+            extractEmail(token);
             return true;
         }
         catch(JwtException exception){
