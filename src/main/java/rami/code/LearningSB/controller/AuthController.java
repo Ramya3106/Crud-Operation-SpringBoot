@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import rami.code.LearningSB.repository.UserRepository;
+import rami.code.LearningSB.service.UserService;
 
 import java.util.Map;
 
@@ -15,14 +16,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AuthController {
     @Autowired
-    private UserRepository userRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody Map<String, String> body){
         String email = body.get("email");
         String password = body.get("password");
         if(userRepository.findByEmail(email).isPresent()){
-           return new ResponseEntity.status(HttpStatus.CONFLICT).body("Email already exists");
+           return new ResponseEntity<>("Email already exists", HttpStatus.CONFLICT);
         }
+
     }
     @PostMapping("/login")
     public String loginUser(@RequestBody Map<String, String> body){
