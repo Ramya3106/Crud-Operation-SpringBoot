@@ -13,7 +13,7 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private final String SECERT = "code io";
+    private final String SECERT = "mysecretkeymysecretkeymysecretkeymysecretkey";
     private final long EXPIRATION = 1000*60;
     private final Key secertKey = Keys.hmacShaKeyFor(SECERT.getBytes(StandardCharsets.UTF_8));
 
