@@ -14,7 +14,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
     private final String SECERT = "mysecretkeymysecretkeymysecretkeymysecretkey";
-    private final long EXPIRATION = 1000*60;
+    private final long EXPIRATION = 1000 * 60 * 60;
     private final Key secertKey = Keys.hmacShaKeyFor(SECERT.getBytes(StandardCharsets.UTF_8));
 
     public String generatetoken(String email) {
@@ -29,7 +29,7 @@ public class JwtUtil {
         return Jwts.parserBuilder()
                 .setSigningKey(secertKey)
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
     }

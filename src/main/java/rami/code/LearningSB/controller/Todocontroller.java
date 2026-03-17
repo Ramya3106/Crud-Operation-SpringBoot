@@ -15,7 +15,7 @@ import rami.code.LearningSB.models.Todo;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/todo")
+@RequestMapping("/api/v1/todo")
 public class Todocontroller {
     private static final Logger log = LoggerFactory.getLogger(Todocontroller.class);
 
@@ -55,7 +55,7 @@ public class Todocontroller {
     }
 
     @PostMapping("/create")
-    ResponseEntity<Todo>createUser(@RequestBody Todo todo){
+    public ResponseEntity<Todo> createUser(@RequestBody Todo todo){
             Todo createTodo = todoService.createTodo(todo);
             return new ResponseEntity<>(createTodo, HttpStatus.CREATED);
     }

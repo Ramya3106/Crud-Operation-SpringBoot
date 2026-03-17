@@ -1,27 +1,36 @@
 package rami.code.LearningSB.models;
 
+import com.fasterxml.jackson.annotation.JsonSetter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.hibernate.annotations.NotFound;
 
 @Entity
 @Data
 public class Todo {
     @Id
     @GeneratedValue
-    Long id;
-    @NotNull
+    private Long id;
     @NotBlank
     @Schema(name= "title", example="Complete Spring Boot")
-    String title;
-    Boolean isCompleted;
+    private String title;
+    private Boolean isCompleted;
+
+    @JsonSetter("isCompleted")
+    public void setIsCompleted(Object value) {
+        if (value instanceof Boolean boolValue) {
+            this.isCompleted = boolValue;
+            return;
+        }
+        if (value instanceof String strValue) {
+            this.isCompleted = Boolean.parseBoolean(strValue);
+            return;
+        }
+        this.isCompleted = false;
+    }
 }
